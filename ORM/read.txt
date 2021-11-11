@@ -1,0 +1,17 @@
+<?php
+include_once __DIR__ . '/../../common/headerGET.php';
+include_once __DIR__ . '/../../common/includeCommon.php';
+
+include_once __DIR__ . '/../../objects/{nombreInstancia}.php';
+
+${nombreInstancia} = new {nombreClase}($db);
+
+${nombreInstancia}Result = ${nombreInstancia}->getAll();
+
+
+if ($common->validateStatus(${nombreInstancia}Result)) {
+
+    $common->response200(${nombreInstancia}Result);
+} else {
+    $common->response404("No data found.");
+}

@@ -1,0 +1,53 @@
+<?php
+include_once __DIR__ . '/../../common/headerPOST.php';
+include_once __DIR__ . '/../../common/includeCommon.php';
+
+include_once __DIR__ . '/../../objects/{nombreInstancia}.php';
+
+${nombreInstancia} = new {nombreClase}($db);
+
+if ($common->validateInput($data, "{stringInsert}")) {
+
+    $db->beginTransaction();
+
+    $common->inputMappingObj($data, ${nombreInstancia});
+
+    ${nombreInstancia}Result = ${nombreInstancia}-> deleteBy{variable}();
+    
+
+    if ($common->validateStatus(${nombreInstancia}Result)) {
+
+        $db->commit();
+
+        $common->response200(${nombreInstancia}Result);
+    } else {
+
+        $db->rollBack();
+
+        $common->response503("Unable to delete.");
+    }
+} else {
+
+    $common->response404("Data is incomplete.");
+}
+
+
+<?php
+include_once __DIR__ . '/../../common/headerGET.php';
+include_once __DIR__ . '/../../common/includeCommon.php';
+
+
+
+${nombreInstancia} = new {nombreClase}($db);
+
+${nombreInstancia}Result = ${nombreInstancia}->getAll();
+
+
+if ($common->validateStatus(${nombreInstancia}Result)) {
+
+    $common->response200(${nombreInstancia}Result);
+} else {
+    $common->response404("No data found.");
+}
+
+
